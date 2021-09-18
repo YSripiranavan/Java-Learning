@@ -1,6 +1,7 @@
 package com.sripiranavan.java.learning.oop.ex4.services.impl;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sripiranavan.java.learning.oop.ex4.entities.User;
 import com.sripiranavan.java.learning.oop.ex4.services.UserManagementService;
@@ -10,15 +11,12 @@ public class DefaultUserManagementService implements UserManagementService {
 	private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
 	private static final String NO_ERROR_MESSAGE = "";
 
-	private static final int DEFAULT_USERS_CAPACITY = 10;
-
 	private static DefaultUserManagementService instance;
 
-	private User[] users;
-	private int lastUserIndex;
+	private List<User> users;
 
 	{
-		users = new User[DEFAULT_USERS_CAPACITY];
+		users = new ArrayList<User>();
 	}
 
 	private DefaultUserManagementService() {
@@ -34,10 +32,7 @@ public class DefaultUserManagementService implements UserManagementService {
 			return errorMessage;
 		}
 
-		if (users.length <= lastUserIndex) {
-			users = Arrays.copyOf(users, users.length << 1);
-		}
-		users[lastUserIndex++] = user;
+		users.add(user);
 		return NO_ERROR_MESSAGE;
 	}
 
@@ -59,39 +54,24 @@ public class DefaultUserManagementService implements UserManagementService {
 		}
 		return instance;
 	}
-	
+
 	@Override
-	public User[] getUsers() {
-		int nonNullUsersAmount = 0;
-		for(User user:users) {
-			if (user != null) {
-				nonNullUsersAmount++;
-			}
-		}
-		
-		User[] nonNullUsers = new User[nonNullUsersAmount];
-		int index =0;
-		for(User user:users) {
-			if (user != null) {
-				nonNullUsers[index++] = user;
-			}
-		}
-		return nonNullUsers;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
 	@Override
 	public User getUserByEmail(String userEmail) {
-		for(User user:users) {
+		for (User user : users) {
 			if (user != null && user.getEmail().equalsIgnoreCase(userEmail)) {
 				return user;
 			}
 		}
 		return null;
 	}
-	
+
 	void clearServiceState() {
-		lastUserIndex =0;
-		users = new User[DEFAULT_USERS_CAPACITY];
+		users.clear();
 	}
 
 }

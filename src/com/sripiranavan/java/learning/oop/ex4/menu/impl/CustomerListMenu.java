@@ -1,5 +1,7 @@
 package com.sripiranavan.java.learning.oop.ex4.menu.impl;
 
+import java.util.List;
+
 import com.sripiranavan.java.learning.oop.ex4.config.ApplicationContext;
 import com.sripiranavan.java.learning.oop.ex4.entities.User;
 import com.sripiranavan.java.learning.oop.ex4.menu.Menu;
@@ -18,8 +20,8 @@ public class CustomerListMenu implements Menu {
 	@Override
 	public void start() {
 		printMenuHeader();
-		User[] users = userManagementService.getUsers();
-		if (users.length == 0) {
+		List<User> users = userManagementService.getUsers();
+		if (users.size() == 0 || users == null) {
 			System.out.println("Unfortunately, there are no customers");
 		} else {
 			for (User user : users) {

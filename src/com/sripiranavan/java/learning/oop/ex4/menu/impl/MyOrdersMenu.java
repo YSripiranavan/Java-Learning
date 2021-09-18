@@ -1,5 +1,7 @@
 package com.sripiranavan.java.learning.oop.ex4.menu.impl;
 
+import java.util.List;
+
 import com.sripiranavan.java.learning.oop.ex4.config.ApplicationContext;
 import com.sripiranavan.java.learning.oop.ex4.entities.Order;
 import com.sripiranavan.java.learning.oop.ex4.menu.Menu;
@@ -29,8 +31,8 @@ public class MyOrdersMenu implements Menu {
 	}
 
 	private void printUserOrdersToConsole() {
-		Order[] loggedInUserOrders = orderManagementService.getOrdersByUserId(context.getLoggedUser().getId());
-		if (loggedInUserOrders == null || loggedInUserOrders.length == 0) {
+		List<Order> loggedInUserOrders = orderManagementService.getOrdersByUserId(context.getLoggedUser().getId());
+		if (loggedInUserOrders == null || loggedInUserOrders.size() == 0) {
 			System.out.println("Unfortunately, you don't have any orders yet. "
 					+ "Navigate back to main menu to place a new order");
 		} else {
