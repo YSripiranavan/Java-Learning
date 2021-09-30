@@ -2,3 +2,10 @@
 /FirstMultiThreadingProgram.class
 /FirstMultiThreadingProgram$1.class
 /InterruptDemo.class
+/PriorityDemo.class
+/YieldDemo.class
+/DaemonThreadDemo.class
+/ThreadGroupDemo.class
+/ThrowingExceptionFromRunnableDemo.class
+/ThreadLocalDemo.class
+/InheritableThreadLocalDemo.class
